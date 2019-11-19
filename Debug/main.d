@@ -236,6 +236,14 @@ main.obj: C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/grl
 main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/stdio.h
 main.obj: ../buttons.h
 main.obj: ../sampling.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/math.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/_defs.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/machine/_limits.h
+main.obj: ../kiss_fft.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/stdlib.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/string.h
+main.obj: ../_kiss_fft_guts.h
+main.obj: C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/limits.h
 
 ../main.c: 
 C:/ti/xdctools_3_32_00_06_core/packages/xdc/std.h: 
@@ -473,3 +481,11 @@ C:/ti/tirtos_tivac_2_16_00_08/products/TivaWare_C_Series-2.1.1.71b/grlib/grlib.h
 C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/stdio.h: 
 ../buttons.h: 
 ../sampling.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/math.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/_defs.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/machine/_limits.h: 
+../kiss_fft.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/stdlib.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/string.h: 
+../_kiss_fft_guts.h: 
+C:/ti/ccs910/ccs/tools/compiler/ti-cgt-arm_18.12.2.LTS/include/limits.h: 

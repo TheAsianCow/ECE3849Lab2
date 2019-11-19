@@ -14961,7 +14961,7 @@ __o = __obj[760]  // ti.sysbios.knl.Task.Instance#0
     __o['stack'] = null
     __o['stackHeap'] = null
     __o['stackSection'] = String(java.net.URLDecoder.decode('.bss%3AtaskStackSection', 'UTF-8'))
-    __o['stackSize'] = 512
+    __o['stackSize'] = 2048
     __o['vitalTaskFlag'] = true
 
 __o = __obj[761]  // ti.sysbios.knl.Task.Instance#0/instance
@@ -14983,7 +14983,7 @@ __o = __obj[762]  // ti.sysbios.knl.Task.Instance#1
     __o['stack'] = null
     __o['stackHeap'] = null
     __o['stackSection'] = String(java.net.URLDecoder.decode('.bss%3AtaskStackSection', 'UTF-8'))
-    __o['stackSize'] = 512
+    __o['stackSize'] = 1024
     __o['vitalTaskFlag'] = true
 
 __o = __obj[763]  // ti.sysbios.knl.Task.Instance#1/instance
@@ -15005,7 +15005,7 @@ __o = __obj[764]  // ti.sysbios.knl.Task.Instance#2
     __o['stack'] = null
     __o['stackHeap'] = null
     __o['stackSection'] = String(java.net.URLDecoder.decode('.bss%3AtaskStackSection', 'UTF-8'))
-    __o['stackSize'] = 2048
+    __o['stackSize'] = 4096
     __o['vitalTaskFlag'] = true
 
 __o = __obj[765]  // ti.sysbios.knl.Task.Instance#2/instance

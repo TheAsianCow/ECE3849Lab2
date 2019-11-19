@@ -54,13 +54,14 @@ void ADC_ISR(void){
 }
 
 int getTriggerIndex(int triggerDirection) {
-    int i;
+    int i, index;
     int tolerence = 25;
+    bool dir;
 
     for(i = 64; i < ADC_BUFFER_SIZE/2; i++) {
-        int index = ADC_BUFFER_WRAP(gADCBufferIndex-i);
+        index = ADC_BUFFER_WRAP(gADCBufferIndex+i);
         if(gADCBuffer[index] >= ADC_OFFSET-tolerence && gADCBuffer[index] <= ADC_OFFSET+tolerence) {
-            bool dir = gADCBuffer[ADC_BUFFER_WRAP(index+2)] > gADCBuffer[ADC_BUFFER_WRAP(index-2)];
+            dir = gADCBuffer[ADC_BUFFER_WRAP(index+3)] > gADCBuffer[ADC_BUFFER_WRAP(index-3)];
             if ((triggerDirection && dir) || (!triggerDirection && !dir)) return index;
         }
     }

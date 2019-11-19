@@ -161,24 +161,26 @@ void ButtonISR(UArg arg0, UArg arg1) {
         presses |= ButtonAutoRepeat();      // autorepeat presses if a button is held long enough
 
         char data = 'A';
-        if (presses & 256) { // joystick up
-            data = 'D';
-            Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
-        }
+        if(presses){
+            if (presses & 256) { // joystick up
+                data = 'D';
+                Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
+            }
 
-        if(presses & 128) { //joystick down
-            data = 'U';
-            Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
-        }
+            if(presses & 128) { //joystick down
+                data = 'U';
+                Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
+            }
 
-        if(presses & 16) {
-            data = 'T';
-            Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
-        }
+            if(presses & 16) {
+                data = 'T';
+                Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
+            }
 
-//        if(presses & 1){
-//            data = 'F';
-//            Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
-//        }
+            if(presses & 2){
+                data = 'F';
+                Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
+            }
+        }
     }
 }
