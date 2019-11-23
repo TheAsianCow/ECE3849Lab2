@@ -24,6 +24,7 @@ volatile uint32_t gADCErrors; // number of missed ADC deadlines
 volatile int32_t gADCBufferIndex = ADC_BUFFER_SIZE - 1; // latest sample index
 volatile uint16_t gADCBuffer[ADC_BUFFER_SIZE];
 
+//Initializes ADC1 to poll at 1Msps
 void ADC1_Init(void){
     SysCtlPeripheralEnable(SYSCTL_PERIPH_GPIOE);
     GPIOPinTypeADC(GPIO_PORTE_BASE, GPIO_PIN_0); // GPIO setup for analog input AIN3
@@ -44,6 +45,7 @@ void ADC1_Init(void){
     IntEnable(INT_ADC1SS0); // enable ADC1 sequence 0 interrupt in int. controller
 }
 
+//ADC Hwi to get data from ADC1 sequence 0
 void ADC_ISR(void){
     ADC1_ISC_R = ADC_ISC_IN0; // clear ADC1 sequence0 interrupt flag in the ADCISC register
      if (ADC1_OSTAT_R & ADC_OSTAT_OV0) { // check for ADC FIFO overflow
@@ -53,21 +55,30 @@ void ADC_ISR(void){
      gADCBuffer[gADCBufferIndex = ADC_BUFFER_WRAP(gADCBufferIndex + 1)] = ADC1_SSFIFO0_R & ADC_SSFIFO0_DATA_M; // read sample from the ADC1 sequence 0 FIFO
 }
 
+/**
+ * Finds and returns the trigger index for main() to draw from.
+ * triggerDirection is 0 for down, 1 for up
+ * Returns -1 if it doesn't find a trigger.
+ */
 int getTriggerIndex(int triggerDirection) {
     int i, index;
-    int tolerence = 25;
+    int tolerence = 25; //Trigger point can be ADC_OFFSET +- tolerence
     bool dir;
 
     for(i = 64; i < ADC_BUFFER_SIZE/2; i++) {
         index = ADC_BUFFER_WRAP(gADCBufferIndex+i);
         if(gADCBuffer[index] >= ADC_OFFSET-tolerence && gADCBuffer[index] <= ADC_OFFSET+tolerence) {
-            dir = gADCBuffer[ADC_BUFFER_WRAP(index+3)] > gADCBuffer[ADC_BUFFER_WRAP(index-3)];
+            dir = gADCBuffer[ADC_BUFFER_WRAP(index+3)] > gADCBuffer[ADC_BUFFER_WRAP(index-3)]; //tells what direction the sin wave is going
             if ((triggerDirection && dir) || (!triggerDirection && !dir)) return index;
         }
     }
     return -1;
 }
 
+/**
+ * Scales voltage to a value that reflects div.
+ * div is in mV
+ */
 int voltageScale(uint16_t voltage, float div) {
     float x = VIN_RANGE * PIXELS_PER_DIV;
     float fScale = x/((1 << ADC_BITS) * div);

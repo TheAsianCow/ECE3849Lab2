@@ -146,7 +146,7 @@ uint32_t ButtonAutoRepeat(void)
     return presses;
 }
 
-// ISR for scanning and debouncing buttons
+// Button Task for scanning and debouncing buttons
 void ButtonISR(UArg arg0, UArg arg1) {
     while(1){
         Semaphore_pend(ButtonSem, BIOS_WAIT_FOREVER);
@@ -161,24 +161,24 @@ void ButtonISR(UArg arg0, UArg arg1) {
         presses |= ButtonAutoRepeat();      // autorepeat presses if a button is held long enough
 
         char data = 'A';
-        if(presses){
+        if(presses){ //if there is a button press
             if (presses & 256) { // joystick up
-                data = 'D';
+                data = 'D'; //Put "Down" into mailbox
                 Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
             }
 
             if(presses & 128) { //joystick down
-                data = 'U';
+                data = 'U'; //Put "Up" into mailbox
                 Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
             }
 
-            if(presses & 16) {
-                data = 'T';
+            if(presses & 16) { //joystick select
+                data = 'T'; //Put "Trigger" into mailbox
                 Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
             }
 
-            if(presses & 2){
-                data = 'F';
+            if(presses & 2){ //USR_SW2
+                data = 'F'; //Put "FFT" into mailbox
                 Mailbox_post(ButtonBox, &data, BIOS_WAIT_FOREVER);
             }
         }
